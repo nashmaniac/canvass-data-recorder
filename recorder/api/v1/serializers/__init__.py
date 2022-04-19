@@ -1,1 +1,1 @@
-from .sensor_data import SensorDataSerializer
+from .sensor_data import SensorDataSerializer, SensorDataInputSerializer

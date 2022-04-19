@@ -1,7 +1,8 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from ..serializers import SensorDataSerializer
+from recorder.api.v1.serializers.sensor_data import SensorDataInputSerializer, SensorDataSerializer
+from recorder.datalayers import SensorDataLayer
 
 
 class SensorDataHealthApiView(APIView):
@@ -16,13 +17,14 @@ class SensorDataHealthApiView(APIView):
 
 
 class SensorDataApiView(APIView):
-    serializer_class = SensorDataSerializer
+    serializer_class = SensorDataInputSerializer
 
     def post(self, request):
         serializer_class = self.serializer_class
         serializer = serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)
-
+        
+        sensor_data = SensorDataLayer.record_sensor_data(serializer.validated_data)
         return Response(
-            serializer.validated_data, status=status.HTTP_200_OK
+            SensorDataSerializer(sensor_data).data, status=status.HTTP_200_OK
         )
