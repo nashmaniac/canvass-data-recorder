@@ -50,7 +50,7 @@ if __name__ == '__main__':
     n = 15  # number of sensors
     lowest_backoff_time = 500
     highest_backoff_time = 1000
-    lowest_data_count = 1
-    highest_data_count = 10
+    lowest_data_count = 1000
+    highest_data_count = 1500
     run_simulation(n, lowest_backoff_time, highest_backoff_time,
                    lowest_data_count, highest_data_count)
