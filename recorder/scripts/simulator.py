@@ -1,11 +1,11 @@
-# build the sensor data & frequency
+import json
 import random
 import threading
 import time
 from datetime import datetime
-import json
 
 import requests
+
 
 def send_data(id: int, backoff: int, message_count: int):
     print('Sensor-%d will send %d data every %d milliseconds' %

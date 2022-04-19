@@ -1,9 +1,10 @@
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework import status
-from recorder.api.v1.serializers.sensor_data import SensorDataInputSerializer, SensorDataSerializer
+from recorder.api.v1.serializers.sensor_data import (SensorDataInputSerializer,
+                                                     SensorDataSerializer)
 from recorder.datalayers import SensorDataLayer
-from datetime import datetime
+from rest_framework import status
+from rest_framework.response import Response
+from rest_framework.views import APIView
+
 
 class SensorDataHealthApiView(APIView):
     def get(self, request):

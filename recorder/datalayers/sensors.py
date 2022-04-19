@@ -1,10 +1,9 @@
-from django.db import transaction, connection
-from django.db.models import ExpressionWrapper, IntegerField, QuerySet, Count, Q, F
-from django.db.models.functions import ExtractMinute, TruncMinute
-from django.forms import DateTimeField, DurationField
-from django_pandas.io import read_frame
 import pandas as pd
-from datetime import datetime, timedelta
+from django.db import connection, transaction
+from django.db.models import ExpressionWrapper, IntegerField, QuerySet
+from django.db.models.functions import ExtractMinute, TruncMinute
+from django_pandas.io import read_frame
+
 from ..models import *
 
 
