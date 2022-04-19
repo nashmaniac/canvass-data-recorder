@@ -3,26 +3,35 @@ import random
 import threading
 import time
 from datetime import datetime
+import json
+
+import requests
 
 def send_data(id: int, backoff: int, message_count: int):
     print('Sensor-%d will send %d data every %d milliseconds' %
           (id, message_count, backoff))
     status = ["on", "off", "active", "inactive"]
     count = 0
+    base_url = 'http://localhost:8000'
+    path = '%s/recorder/api/v1/sensor-data/' % base_url
     while(count < message_count):
         count += 1
-        pressure = round((random.random() * random.randint(1, 200))+random.randint(1, 200), 2)
-        temp = round((random.random() * random.randint(1, 200))+random.randint(1, 200), 2)
+        pressure = round(
+            (random.random() * random.randint(1, 200))+random.randint(1, 200), 2)
+        temp = round((random.random() * random.randint(1, 200)) +
+                     random.randint(1, 200), 2)
         data = dict(
-            deviceId='sensor-%d'%id,
-            timestamp = datetime.now().isoformat(),
+            deviceId='sensor-%d' % id,
+            timestamp=datetime.now().isoformat(),
             pressure=pressure,
             temperature=temp,
             status=status[random.randint(0, len(status)-1)]
-            
         )
+        json_object = json.dumps(data, indent=4)
         print('Sensor-%d sending data %d - %s' %
-              (id, count, str(data)))
+              (id, count, str(json_object)))        
+        r = requests.post(path, data=data)
+        print(r.json())
         time.sleep(backoff/100)
     print('Sensor-%d is done sending data' % id)
 
