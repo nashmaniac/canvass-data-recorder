@@ -51,6 +51,6 @@ if __name__ == '__main__':
     lowest_backoff_time = 500
     highest_backoff_time = 1000
     lowest_data_count = 1000
-    highest_data_count = 1500
+    highest_data_count = 5000
     run_simulation(n, lowest_backoff_time, highest_backoff_time,
                    lowest_data_count, highest_data_count)
