@@ -32,7 +32,7 @@ def send_data(id: int, backoff: int, message_count: int):
               (id, count, str(json_object)))        
         r = requests.post(path, data=data)
         # print(r.json())
-        time.sleep(backoff/100)
+        time.sleep(backoff/1000)
     print('Sensor-%d is done sending data' % id)
 
 
